@@ -1,0 +1,208 @@
+<html><head><base href="https://phantomarcade.io/neonvoid/voidpuzzle"><title>Void Puzzle - Neon Void</title>
+<style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Orbitron', sans-serif;
+    background-color: #000;
+    color: #0ff;
+    overflow: hidden;
+  }
+  .game-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+  }
+  .header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(90deg, #000, #0ff, #000);
+  }
+  .title {
+    font-size: 2.5em;
+    margin: 0;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  }
+  .game-area {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+  .puzzle-cube {
+    width: 300px;
+    height: 300px;
+    transform-style: preserve-3d;
+    animation: rotate 20s infinite linear;
+  }
+  @keyframes rotate {
+    from { transform: rotateX(0) rotateY(0) rotateZ(0); }
+    to { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
+  }
+  .face {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    background: rgba(0, 255, 255, 0.1);
+    border: 2px solid #0ff;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2px;
+    transform-style: preserve-3d;
+  }
+  .cell {
+    background: rgba(0, 255, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .cell:hover {
+    background: rgba(0, 255, 255, 0.4);
+  }
+  .face:nth-child(1) { transform: translateZ(150px); }
+  .face:nth-child(2) { transform: rotateY(90deg) translateZ(150px); }
+  .face:nth-child(3) { transform: rotateY(180deg) translateZ(150px); }
+  .face:nth-child(4) { transform: rotateY(-90deg) translateZ(150px); }
+  .face:nth-child(5) { transform: rotateX(90deg) translateZ(150px); }
+  .face:nth-child(6) { transform: rotateX(-90deg) translateZ(150px); }
+  .controls {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+  }
+  .control-btn {
+    background: #0ff;
+    color: #000;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .control-btn:hover {
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
+  }
+  .footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.8em;
+  }
+</style>
+</head>
+<body>
+<div class="game-container">
+  <header class="header">
+    <h1 class="title">Void Puzzle</h1>
+  </header>
+  
+  <main class="game-area">
+    <div class="puzzle-cube">
+      <div class="face">
+        <div class="cell">1</div>
+        <div class="cell">2</div>
+        <div class="cell">3</div>
+        <div class="cell">4</div>
+        <div class="cell">5</div>
+        <div class="cell">6</div>
+        <div class="cell">7</div>
+        <div class="cell">8</div>
+        <div class="cell">9</div>
+      </div>
+      <div class="face">
+        <div class="cell">A</div>
+        <div class="cell">B</div>
+        <div class="cell">C</div>
+        <div class="cell">D</div>
+        <div class="cell">E</div>
+        <div class="cell">F</div>
+        <div class="cell">G</div>
+        <div class="cell">H</div>
+        <div class="cell">I</div>
+      </div>
+      <div class="face">
+        <div class="cell">α</div>
+        <div class="cell">β</div>
+        <div class="cell">γ</div>
+        <div class="cell">δ</div>
+        <div class="cell">ε</div>
+        <div class="cell">ζ</div>
+        <div class="cell">η</div>
+        <div class="cell">θ</div>
+        <div class="cell">ι</div>
+      </div>
+      <div class="face">
+        <div class="cell">♠</div>
+        <div class="cell">♣</div>
+        <div class="cell">♥</div>
+        <div class="cell">♦</div>
+        <div class="cell">★</div>
+        <div class="cell">☆</div>
+        <div class="cell">♪</div>
+        <div class="cell">♫</div>
+        <div class="cell">☯</div>
+      </div>
+      <div class="face">
+        <div class="cell">◯</div>
+        <div class="cell">△</div>
+        <div class="cell">□</div>
+        <div class="cell">⬠</div>
+        <div class="cell">⬡</div>
+        <div class="cell">⬢</div>
+        <div class="cell">⬣</div>
+        <div class="cell">⬤</div>
+        <div class="cell">⬥</div>
+      </div>
+      <div class="face">
+        <div class="cell">❶</div>
+        <div class="cell">❷</div>
+        <div class="cell">❸</div>
+        <div class="cell">❹</div>
+        <div class="cell">❺</div>
+        <div class="cell">❻</div>
+        <div class="cell">❼</div>
+        <div class="cell">❽</div>
+        <div class="cell">❾</div>
+      </div>
+    </div>
+  </main>
+  
+  <div class="controls">
+    <button class="control-btn">Rotate X</button>
+    <button class="control-btn">Rotate Y</button>
+    <button class="control-btn">Rotate Z</button>
+    <button class="control-btn">Shuffle</button>
+    <button class="control-btn">Reset</button>
+  </div>
+  
+  <footer class="footer">
+    <p>© 2023 Phantom Arcade | <a href="https://phantomarcade.io/neonvoid">Back to Neon Void</a></p>
+  </footer>
+</div>
+
+<script>
+  document.querySelectorAll('.cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+      cell.style.transform = 'rotateY(180deg)';
+      setTimeout(() => {
+        cell.style.transform = 'rotateY(0deg)';
+      }, 1000);
+    });
+  });
+
+  document.querySelectorAll('.control-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Placeholder for control button functionality
+      alert(`${btn.textContent} functionality coming soon!`);
+    });
+  });
+</script>
+</body></html>
