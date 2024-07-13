@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZEN Puzzle</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            overflow: hidden;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header {
+            text-align: center;
+            padding: 20px;
+            background: linear-gradient(90deg, #e0e0e0, #ffffff, #e0e0e0);
+        }
+        .title {
+            font-size: 2em;
+            margin: 0;
+            color: #333;
+        }
+        .game-area {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+        .puzzle-cube {
+            width: 80vmin;
+            height: 80vmin;
+            max-width: 300px;
+            max-height: 300px;
+            transform-style: preserve-3d;
+            animation: rotate 30s infinite linear;
+        }
+        @keyframes rotate {
+            from { transform: rotateX(0) rotateY(0) rotateZ(0); }
+            to { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
+        }
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #ccc;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 2px;
+            transform-style: preserve-3d;
+        }
+        .cell {
+            background: rgba(200, 200, 200, 0.2);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .cell:hover {
+            background: rgba(200, 200, 200, 0.4);
+        }
+        .face:nth-child(1) { transform: translateZ(40vmin); }
+        .face:nth-child(2) { transform: rotateY(90deg) translateZ(40vmin); }
+        .face:nth-child(3) { transform: rotateY(180deg) translateZ(40vmin); }
+        .face:nth-child(4) { transform: rotateY(-90deg) translateZ(40vmin); }
+        .face:nth-child(5) { transform: rotateX(90deg) translateZ(40vmin); }
+        .face:nth-child(6) { transform: rotateX(-90deg) translateZ(40vmin); }
+        .controls {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+        }
+        .control-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+        }
+        .control-btn:hover {
+            background: #45a049;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 0.8em;
+            background-color: #e0e0e0;
+        }
+        
+        @media (max-width: 600px) {
+            .title {
+                font-size: 1.5em;
+            }
+            .puzzle-cube {
+                width: 90vmin;
+                height: 90vmin;
+            }
+            .cell {
+                font-size: 1em;
+            }
+            .control-btn {
+                padding: 8px 12px;
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <header class="header">
+        <h1 class="title">ZEN Puzzle</h1>
+    </header>
+    
+    <main class="game-area">
+        <div class="puzzle-cube">
+            <div class="face">
+                <div class="cell">1</div>
+                <div class="cell">2</div>
+                <div class="cell">3</div>
+                <div class="cell">4</div>
+                <div class="cell">5</div>
+                <div class="cell">6</div>
+                <div class="cell">7</div>
+                <div class="cell">8</div>
+                <div class="cell">9</div>
+            </div>
+            <div class="face">
+                <div class="cell">A</div>
+                <div class="cell">B</div>
+                <div class="cell">C</div>
+                <div class="cell">D</div>
+                <div class="cell">E</div>
+                <div class="cell">F</div>
+                <div class="cell">G</div>
+                <div class="cell">H</div>
+                <div class="cell">I</div>
+            </div>
+            <div class="face">
+                <div class="cell">α</div>
+                <div class="cell">β</div>
+                <div class="cell">γ</div>
+                <div class="cell">δ</div>
+                <div class="cell">ε</div>
+                <div class="cell">ζ</div>
+                <div class="cell">η</div>
+                <div class="cell">θ</div>
+                <div class="cell">ι</div>
+            </div>
+            <div class="face">
+                <div class="cell">♠</div>
+                <div class="cell">♣</div>
+                <div class="cell">♥</div>
+                <div class="cell">♦</div>
+                <div class="cell">★</div>
+                <div class="cell">☆</div>
+                <div class="cell">♪</div>
+                <div class="cell">♫</div>
+                <div class="cell">☯</div>
+            </div>
+            <div class="face">
+                <div class="cell">◯</div>
+                <div class="cell">△</div>
+                <div class="cell">□</div>
+                <div class="cell">⬠</div>
+                <div class="cell">⬡</div>
+                <div class="cell">⬢</div>
+                <div class="cell">⬣</div>
+                <div class="cell">⬤</div>
+                <div class="cell">⬥</div>
+            </div>
+            <div class="face">
+                <div class="cell">❶</div>
+                <div class="cell">❷</div>
+                <div class="cell">❸</div>
+                <div class="cell">❹</div>
+                <div class="cell">❺</div>
+                <div class="cell">❻</div>
+                <div class="cell">❼</div>
+                <div class="cell">❽</div>
+                <div class="cell">❾</div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="controls">
+        <button class="control-btn">Rotate X</button>
+        <button class="control-btn">Rotate Y</button>
+        <button class="control-btn">Rotate Z</button>
+        <button class="control-btn">Shuffle</button>
+        <button class="control-btn">Reset</button>
+    </div>
+    
+    <footer class="footer">
+        <p>© 2024 ZEN Puzzle | <a href="#">Back to Home</a></p>
+    </footer>
+</div>
+
+<script>
+    document.querySelectorAll('.cell').forEach(cell => {
+        cell.addEventListener('click', () => {
+            cell.style.transform = 'rotateY(180deg)';
+            setTimeout(() => {
+                cell.style.transform = 'rotateY(0deg)';
+            }, 1000);
+        });
+    });
+
+    document.querySelectorAll('.control-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Placeholder for control button functionality
+            alert(`${btn.textContent} functionality coming soon!`);
+        });
+    });
+</script>
+</body>
+</html>
